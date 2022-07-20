@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import heapq
 
 # get the subdirectories that contain the attack folders
 dir = '/Users/manasg/Downloads/Final_project_ML/AWID/AWID3_Dataset_CSV/CSV/'
@@ -14,7 +15,6 @@ for ind, i in enumerate(folders):
 	else:
 		path = f'{i}/'
 		files = os.listdir(path)
-
 		print(f'File Path: {path}')
 
 		file_names = []
@@ -45,8 +45,14 @@ for ind, i in enumerate(folders):
 print("\nFile names with Attack data and ratio of attack to normal rows: \n", attack_traffic_files)
 print("\nFile names with no attack data: ", no_attack_traffic_files)
 
-# export the list of files with NO attack traffic to a txt files
+# export the list of files with NO attack traffic to a txt file
 f = open('/Users/manasg/Downloads/Final_project_ML/AWID/AWID3_Dataset_CSV/no_Attack_data.txt', 'w')
 with open('/Users/manasg/Downloads/Final_project_ML/AWID/AWID3_Dataset_CSV/no_Attack_data.txt', 'w') as filehandle:
     for listitem in no_attack_traffic_files:
         filehandle.write('%s\n' % listitem)
+
+# find the files with the largest and smallest attack to normal traffic ratio
+lowest = heapq.nsmallest(5, attack_traffic_files, key=attack_traffic_files.get)
+print(f'\nFiles with the lowest attack data {lowest}')
+highest = heapq.nlargest(5, attack_traffic_files, key=attack_traffic_files.get)
+print(f'Files with the highest attack data {highest}')
