@@ -3,7 +3,7 @@ import pandas as pd
 import heapq
 
 # get the subdirectories that contain the attack folders
-dir = '/Users/manasg/Downloads/Final_project_ML/AWID/AWID3_Dataset_CSV/CSV/'
+dir = 'C:\\Masters\\MlFinalProjFinal\\Data\\\CSV'
 folders = [x[0] for x in os.walk(dir)]
 
 attack_traffic_files = {}
